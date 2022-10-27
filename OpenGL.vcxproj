@@ -153,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="maps.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="utilities.h" />
     <ClInclude Include="shader.h" />
   </ItemGroup>
