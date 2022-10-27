@@ -54,6 +54,6 @@ float u_fix(float n) {
 }
 
 float u_norm(int px) {
-	return ((float) px / RES[0]) - 0.5;
+	return ((float) px / RES[0]);
 }
 #endif

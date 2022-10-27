@@ -60,6 +60,7 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		player.movement(keys);
+		
 		renderMap();
 		g_RenderSquare(player.getSize(), player.getPosition(), color);
 

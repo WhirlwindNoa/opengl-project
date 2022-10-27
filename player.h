@@ -66,7 +66,7 @@ public:
 	// constructor
 	Player() {
 		speed = 0.01f;
-		size = 0.1f;
+		size = 0.02f;
 		angle = 0;
 
 		std::cout << "[LOG] Player object has been initialized!" << std::endl;

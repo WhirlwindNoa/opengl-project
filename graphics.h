@@ -121,7 +121,7 @@ void renderMap() {
 		float x = map.world_map.at(i).at(0);
 		float y = map.world_map.at(i).at(1);
 
-		g_RenderSquare(0.05, {x, y, 0}, {1.0f, 1.0f, 1.0f});
+		g_RenderRect({ x, y, 0.08, 0.08 }, { 1.0f, 1.0f, 1.0f });
 	}
 }
 
