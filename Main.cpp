@@ -1,17 +1,19 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include <cstdlib>
+#include <time.h>
 
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
 
 #include "shader.h"
-#include "utilities.h"
 #include "graphics.h"
 #include "player.h"
 #include "config.h"
 
 int main() {
+	srand((unsigned)time(NULL));
 	Player player;
 
 	glfwInit();
@@ -61,10 +63,10 @@ int main() {
 
 		player.movement(keys);
 		
-		renderMap();
-		g_RenderSquare(player.getSize(), player.getPosition(), color);
+		Rect playerRect(player.getPosition().at(0), player.getPosition().at(1), player.getSize(), player.getSize());
+		g_RenderRect(playerRect, color);
 
-		std::cout << "";
+		renderMap();
 		
 		glfwPollEvents();
 		glfwSwapBuffers(window);
