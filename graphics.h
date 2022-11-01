@@ -76,8 +76,8 @@ void g_RenderRect(Rect rect, std::vector<float> clr) {
 
 void g_RenderLine(int startx, int starty, int endx, int endy, std::vector<float> color) {
 	GLfloat vertices[] = {
-		startx / RES[0], starty / RES[1],
-		endx / RES[0], endy / RES[1]
+		(float) startx / RES[0], (float) starty / RES[1], 0, color.at(0), color.at(1), color.at(2),
+		(float) endx   / RES[0], (float) endy   / RES[1], 0, color.at(0), color.at(1), color.at(2)
 	};
 
 	glGenVertexArrays(1, &VAOline);
@@ -88,10 +88,10 @@ void g_RenderLine(int startx, int starty, int endx, int endy, std::vector<float>
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

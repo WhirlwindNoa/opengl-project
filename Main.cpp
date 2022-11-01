@@ -63,9 +63,16 @@ int main() {
 
 		player.movement(keys);
 		
-		Rect playerRect(player.getPosition().at(0), player.getPosition().at(1), player.getSize(), player.getSize());
+		float x = player.getPosition().at(0);
+		float y = player.getPosition().at(1);
+		float angle = player.getAngle();
+
+		int size = player.getSize();
+
+		Rect playerRect(x, y, size, size);
 		g_RenderRect(playerRect, color);
 
+		g_RenderLine(x, y, x + RES[0] * cos(angle), y + RES[0] * sin(angle), {1.0f, 1.0f, 1.0f});
 		renderMap();
 		
 		glfwPollEvents();

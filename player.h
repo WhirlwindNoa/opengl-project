@@ -96,10 +96,14 @@ public:
 		}
 
 		if (keys.at(4)) { // ARROW LEFT
-			angle -= 0.05;
+			angle += 0.05;
 		}
 		if (keys.at(5)) { // ARROW RIGHT
-			angle += 0.05;
+			angle -= 0.05;
+		}
+
+		if (angle > 360) {
+			angle - 360;
 		}
 	}
 
