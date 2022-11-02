@@ -7,6 +7,7 @@
 #include <math.h>
 
 #include "config.h"
+#include "trigmath.h"
 
 std::vector<bool> processInput(GLFWwindow* window)
 {
@@ -39,13 +40,17 @@ private:
 	int size;
 	float angle;
 
-	std::vector < float > pos{ 0, 0, 0 };
+	Vector3f pos = { 0, 0, 0 };
 
 
 public:
 	// get player attributes
-	std::vector<float> getPosition() {
+	Vector3f getPosition() {
 		return pos;
+	}
+
+	Vector3i getGridPosition() {
+		return { (int)pos.x / TILE, (int)pos.y / TILE, (int)pos.z / TILE};
 	}
 
 	float getSpeed() {
@@ -60,10 +65,8 @@ public:
 	}
 
 	// set player attributes
-	void setPosition(float x, float y, float z) {
-		pos.at(0) = x;
-		pos.at(1) = y;
-		pos.at(2) = z;
+	void setPosition(Vector3f apos) {
+		pos = apos;
 	}
 
 	void setSpeed(int s) {
@@ -75,24 +78,26 @@ public:
 
 	// game functions
 	void movement(std::vector<bool> keys) {
-		float sin_a = sin(angle);
-		float cos_a = cos(angle);
+		double sin_a;
+		double cos_a;
+
+		cossin_cordic(angle, 5, cos_a, sin_a);
 
 		if (keys.at(0)) { // W
-			pos.at(0) += (speed * cos_a);
-			pos.at(1) += (speed * sin_a);
+			pos.x += (speed * cos_a);
+			pos.y += (speed * sin_a);
 		}
 		if (keys.at(1)) { // A
-			pos.at(0) += (speed * sin_a);
-			pos.at(1) += (-speed * cos_a);
+			pos.x += (-speed * sin_a);
+			pos.y += (speed * cos_a);
 		}
 		if (keys.at(2)) { // S
-			pos.at(0) += (-speed * cos_a);
-			pos.at(1) += (-speed * sin_a);
+			pos.x += (-speed * cos_a);
+			pos.y += (-speed * sin_a);
 		}
 		if (keys.at(3)) { // D
-			pos.at(0) += (-speed * sin_a);
-			pos.at(1) += (speed * cos_a);
+			pos.x += (speed * sin_a);
+			pos.y += (-speed * cos_a);
 		}
 
 		if (keys.at(4)) { // ARROW LEFT

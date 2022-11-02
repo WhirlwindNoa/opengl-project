@@ -13,25 +13,11 @@
 #include <time.h>
 #include <cmath>
 
+#include "trigmath.h";
 #include "config.h"
 #include "maps.h"
 
 Maps map;
-
-class Rect {
-public:
-	int x;
-	int y;
-	int width;
-	int height;
-
-	Rect(int ox, int oy, int w, int h) {
-		x = ox;
-		y = oy;
-		width = w;
-		height = h;
-	}
-};
 
 // render a rectangle
 // coor = {center x, center y, width, height}
@@ -102,6 +88,13 @@ void g_RenderLine(int startx, int starty, int endx, int endy, std::vector<float>
 	glDeleteBuffers(1, &VBOline);
 }
 
+//Vector2f rayInTile(Vector2f rayEnd)
+//{
+//	std::vector<std::vector<int>>::iterator it;
+//	it = std::find(map.world.begin(), map.world.end(), { rayEnd.x, rayEnd.y })
+//}
+
+
 void renderMap() {
 	for (int i = 0; i < map.world.size(); i++) {
 		int x = map.world.at(i).at(0);
@@ -113,7 +106,24 @@ void renderMap() {
 									(float)map.world.at(i).at(4) / 255
 								   };
 
-		g_RenderRect(Rect(x, y, TILE/2, TILE/2), color);
+		Rect rect = { x, y, TILE / 2, TILE / 2 };
+		g_RenderRect(rect, color);
+	}
+}
+
+void rayCasting(int xo, int yo, float angle) {
+	float cur_angle = angle - FOV / 2;
+
+	for (int ray = 0; ray < NUM_RAYS; ray++) {
+		double sin_a = sin(cur_angle);
+		double cos_a = cos(cur_angle);
+
+		float x = (float)xo + RES[0] * cos_a;
+		float y = (float)yo + RES[0] * sin_a;
+
+		g_RenderLine(xo, yo, x, y, { 0.5f, 0.5f, 0.5f });
+
+		cur_angle += DELTA_ANGLE;
 	}
 }
 

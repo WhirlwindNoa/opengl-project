@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="graphics.h" />
     <ClInclude Include="config.h" />
+    <ClInclude Include="trigmath.h" />
     <ClInclude Include="maps.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="shader.h" />

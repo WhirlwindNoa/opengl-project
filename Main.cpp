@@ -63,16 +63,26 @@ int main() {
 
 		player.movement(keys);
 		
-		float x = player.getPosition().at(0);
-		float y = player.getPosition().at(1);
-		float angle = player.getAngle();
+		Vector3f pos = player.getPosition();
+		//Vector2f pos2 = { pos.x, pos.y };
 
+		//Vector3i gridPos = player.getGridPosition();
+		//Vector2i gridPos2 = { gridPos.x, gridPos.y };
+
+		float angle = player.getAngle();
 		int size = player.getSize();
 
-		Rect playerRect(x, y, size, size);
+		rayCasting(pos.x, pos.y, angle);
+		//Vector2f rayEndPos = { pos.x + RES[0] * cos(angle), pos.y + RES[0] * sin(angle) };
+		Rect playerRect = { pos.x, pos.y, size, size };
 		g_RenderRect(playerRect, color);
 
-		g_RenderLine(x, y, x + RES[0] * cos(angle), y + RES[0] * sin(angle), {1.0f, 1.0f, 1.0f});
+		g_RenderLine(pos.x, pos.y,pos.x + RES[0] * cos(angle), pos.y + RES[0] * sin(angle), {1.0f, 1.0f, 1.0f});
+		
+		//Vector2f hit = rayInTile(rayEndPos);
+
+		//std::cout << player.getGridPosition().x << " " << player.getGridPosition().y << std::endl;
+		//g_RenderLine(pos.x, pos.y, hit.x, hit.y, { 1.0f, 1.0f, 1.0f });
 		renderMap();
 		
 		glfwPollEvents();
