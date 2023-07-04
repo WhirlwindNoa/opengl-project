@@ -1,6 +1,7 @@
 # random graphics application made on c++
 
 this was supposed to be a raycasting engine, however i lost motivation. maybe i will continue one day
+
 uses:
 - GLFW
 - GLAD
